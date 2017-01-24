@@ -33,10 +33,13 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "POST /users/login" do
-    pending it "logs in user" do
+    it "logs in user" do
       user_params = {user: {email: 'test@email.com', password: '12345'}}
+      FactoryGirl.create(:user, email: 'test@email.com', password: '12345')
       post '/users/login', params: user_params
       response.code.should eq('200')
+      api_response.should include('jwt')
+      api_response['jwt'].should_not eq('')
     end
   end
 

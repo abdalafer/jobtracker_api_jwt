@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :authenticate!, except: [:index, :create, :login]
+  before_filter :authenticate!, except: [:index, :create]
   before_action :set_user, only: [:show, :update, :destroy]
+
+  #TODO Warden JWT
+  #http://blog.maestrano.com/rails-api-authentication-with-warden-without-devise/
+  #https://medium.com/@goncalvesjoao/rails-devise-jwt-and-the-forgotten-warden-67cfcf8a0b73#.ocjbhzpa6
+
+  #implement authentication without devise, using warden
+  # modify warden authentication to have a strategy for json web token
 
   # GET /users
   def index
@@ -37,6 +44,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+  end
+
+  def login
+    #User.authenticate(user_params[:email], user_params[:password])
+
+    render json: current_user
   end
 
   private

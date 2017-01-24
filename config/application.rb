@@ -33,11 +33,5 @@ module JobtrackerApiJwt
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
-
-    #Adding Warden to the middle of the stack
-    config.middleware.insert_after ActionDispatch::Callbacks, Warden::Manager do |manager|
-      manager.default_strategies :authentication_jwt_strategy
-      manager.failure_app = UnauthorizedController
-    end
   end
 end
