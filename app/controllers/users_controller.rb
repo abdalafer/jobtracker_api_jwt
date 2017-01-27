@@ -2,13 +2,6 @@ class UsersController < ApplicationController
   before_filter :authenticate!, except: [:index, :create]
   before_action :set_user, only: [:show, :update, :destroy]
 
-  #TODO Warden JWT
-  #http://blog.maestrano.com/rails-api-authentication-with-warden-without-devise/
-  #https://medium.com/@goncalvesjoao/rails-devise-jwt-and-the-forgotten-warden-67cfcf8a0b73#.ocjbhzpa6
-
-  #implement authentication without devise, using warden
-  # modify warden authentication to have a strategy for json web token
-
   # GET /users
   def index
     @users = User.all
