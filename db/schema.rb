@@ -10,7 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122161716) do
+ActiveRecord::Schema.define(version: 20170126205257) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "address"
+    t.text     "notes"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.uuid     "uuid",       default: -> { "uuid_generate_v4()" }, null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
+  end
+
+  create_table "job_tasks", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "state",      default: 0,                           null: false
+    t.integer  "job_id"
+    t.text     "notes"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.uuid     "uuid",       default: -> { "uuid_generate_v4()" }, null: false
+    t.index ["job_id"], name: "index_job_tasks_on_job_id", using: :btree
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "state",       default: 0,                           null: false
+    t.integer  "customer_id"
+    t.text     "notes"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.uuid     "uuid",        default: -> { "uuid_generate_v4()" }, null: false
+    t.index ["customer_id"], name: "index_jobs_on_customer_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "full_name"
@@ -21,4 +58,7 @@ ActiveRecord::Schema.define(version: 20170122161716) do
     t.datetime "updated_at",           null: false
   end
 
+  add_foreign_key "customers", "users"
+  add_foreign_key "job_tasks", "jobs"
+  add_foreign_key "jobs", "customers"
 end
