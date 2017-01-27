@@ -83,6 +83,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
+    pg (0.18.4)
     puma (3.6.2)
     rack (2.0.1)
     rack-cors (0.4.0)
@@ -151,6 +152,7 @@ GEM
       thread_safe (~> 0.1)
     warden (1.2.6)
       rack (>= 1.0)
+    warden-rspec-rails (0.2.0)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -165,6 +167,7 @@ DEPENDENCIES
   factory_girl_rails
   jwt
   listen (~> 3.0.5)
+  pg
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.1)
@@ -174,6 +177,7 @@ DEPENDENCIES
   sqlite3
   tzinfo-data
   warden
+  warden-rspec-rails
 
 BUNDLED WITH
    1.14.1
