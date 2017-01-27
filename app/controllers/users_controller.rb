@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 
@@ -40,8 +39,6 @@ class UsersController < ApplicationController
   end
 
   def login
-    #User.authenticate(user_params[:email], user_params[:password])
-
     render json: current_user
   end
 

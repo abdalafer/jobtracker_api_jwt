@@ -32,7 +32,11 @@ class AuthenticationPasswordStrategy < ::Warden::Strategies::Base
       user.generate_jwt_token
       return success!(user)
     end
+  end
 
+  def params
+    #https://github.com/hassox/warden/issues/84
+    env['action_dispatch.request.parameters']
   end
 end
 

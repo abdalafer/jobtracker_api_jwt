@@ -39,7 +39,7 @@ RSpec.describe "Users", type: :request do
       post '/users/login', params: user_params
       response.code.should eq('200')
       api_response.should include('jwt')
-      api_response['jwt'].should_not eq('')
+      api_response['jwt'].should_not eq(nil)
     end
   end
 
